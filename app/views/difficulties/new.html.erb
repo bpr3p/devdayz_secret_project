@@ -1,0 +1,15 @@
+<%= form_for @difficulty do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :rating %><br>
+    <%= form.text_field :rating %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,10 @@
+<h1>Difficulties index</h1>
+<ul>
+  <% @difficulties.each do |d| %>
+    <li>
+      <%= "#{d.name} - #{d.rating}" %> <%= link_to "Edit", edit_difficulty_path(d) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Difficulty Category", new_difficulty_path %>

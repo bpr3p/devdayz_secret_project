@@ -1,0 +1,15 @@
+<%= form_for @clue do |form| %>
+  <p>
+    <%= form.label :word %><br>
+    <%= form.text_field :word %>
+  </p>
+
+  <p>
+    <%= form.label :difficulty_id %><br>
+    <%= form.select(:difficulty_id, options_for_select(Difficulty.all.collect {|p| [ p.name, p.id ] }), { include_blank: true }) %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
