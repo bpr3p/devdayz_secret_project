@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :clues
   resources :difficulties
+  resources :teams
   devise_for :users
   namespace :api do
     namespace :v1 do
