@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
   def index
-    @difficulties = Difficulty.all
+    @clues = Clue.all
   end
 end
