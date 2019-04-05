@@ -7,17 +7,16 @@ class WordTile extends Component {
   }
 
   render() {
-
-    return (
-      <div>
-        <div>
-          <a href={`clues/${this.props.id}`}>
-            {this.props.word}
-          </a> - <a href={`difficulties/${this.props.difficulty_id}`}>
-            {this.props.difficulty}
-          </a>
-        </div>
+    let clueDiv
+    if (this.props.word == null) {
+      clueDiv = <div className="blank-clue-block" id={this.props.id} onClick={this.props.handleClueClick}>REVEAL</div>
+    } else {
+      clueDiv = <div className="clue-block" id={this.props.id} onClick={this.props.handleClueClick}>
+        {this.props.word}
       </div>
+    }
+    return (
+      clueDiv
     );
   };
 }

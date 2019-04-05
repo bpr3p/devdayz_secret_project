@@ -1,0 +1,82 @@
+.parent-div {
+  display: flex;
+  justify-content: center;
+}
+
+.clue-block {
+  align-self: center;
+  background-color: black;
+  margin: .5em 0em .5em 0em;
+  color: purple;
+  text-align: center;
+  height: 3em;
+  line-height: 3em;
+  font-size: 1.5em;
+}
+
+.blank-clue-block {
+  align-self: center;
+  background-color: black;
+  margin: .5em 0em .5em 0em;
+  color: white;
+  text-align: center;
+  height: 3em;
+  line-height: 3em;
+  font-size: 1.5em;
+}
+
+.stopButtonDiv {
+  margin: 3em auto 0em auto;
+  width: 10em;
+}
+
+.grid-container {
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-grid;
+  grid-template-columns: 14em 14em 14em;
+  grid-column-gap: 2em;
+  grid-row-gap: 1em;
+  justify-content: center;
+}
+
+.grid-item1 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.grid-item2 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.grid-item3 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.grid-item4 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.row-header {
+  text-align: center;
+}
+
+.easy-column {
+  background-color: green;
+}
+
+.medium-column {
+  background-color: yellow;
+}
+
+.hard-column {
+  background-color: red;
+}
+
+.row-header {
+  font-weight: 900;
+  font-size: 2em;
+}
