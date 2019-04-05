@@ -15,3 +15,12 @@
  *= require foundation_and_overrides
 
  */
+
+ .site-name{
+    padding-right: 5px;
+    margin-top: 8px
+ }
+
+ .site-name > h4{
+     color: aliceblue
+ }

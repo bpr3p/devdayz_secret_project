@@ -13,11 +13,18 @@
 
   <nav class="top-bar">
     <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">DevdayzSecretProject</a></h1>
+      <li class="site-name">
+        <h4>DevdayzSecretProject</h4>
       </li>
     </ul>
 
+    <%- if current_user -%>
+      <ul class="admin-nav">
+        <li class="maps"><%= link_to 'Maps', '/maps/index' %></li>
+        <li class="pictionary"><%= link_to 'Pictionary', '/pictionary/create' %></li>
+        <li class="teams"><%= link_to 'Teams', '/teams/create' %></li>
+      </ul>
+    <%- end -%>
     <section class="top-bar-section">
       <ul class="right">
         <%- if current_user -%>

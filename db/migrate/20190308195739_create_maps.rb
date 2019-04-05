@@ -10,6 +10,7 @@ class CreateMaps < ActiveRecord::Migration[5.2]
     Map.create(latitude: "42.3952668", longitude:"-71.1458313", pop_up_text:"3PLYMPICS 007")
     Map.create(latitude:"42.3899627", longitude:" -71.1210779", pop_up_text:"THE QUEST FOR TREY")
     Map.create(latitude:"42.35190", longitude:"-71.04834", pop_up_text:"THE NAME'S BOND. TREY BOND.")
+    Map.create(latitude:"42.3847462", longitude:"-71.201286", pop_up_text:"WALTHAM IS COMING.")
   end
 
   def self.down
