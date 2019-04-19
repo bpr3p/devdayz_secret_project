@@ -11,6 +11,7 @@ class Score < ApplicationRecord
   end
 
   private
+
   def total_for_team
     self.class.for_team(team).map(&:value).reduce(:+)
   end
