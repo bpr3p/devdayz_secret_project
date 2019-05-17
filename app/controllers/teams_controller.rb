@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -17,7 +18,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(recipe_params)
+    @team = Team.new(team_params)
 
     respond_to do |format|
       if @team.save
@@ -32,12 +33,12 @@ class TeamsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recipe }
+      if @team.update(team_params)
+        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,6 +57,10 @@ class TeamsController < ApplicationController
 
  # Use callbacks to share common setup or constraints between actions.
   def set_recipe
-    @team = Team.find(params[:id])
+    @team = Team.find(params[:id]) if params[:id].present?
+  end
+
+  def team_params
+    params.require(:team).permit(:name, :description, :year_id)
   end
 end
