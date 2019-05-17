@@ -1,4 +1,78 @@
-<p>
-  Modify me in `app/views/homes/index.html.erb` or change the root directive in
-  `config/routes.rb`
-</p>
+<iframe style="display:none" width="0" height="0" src="https://www.youtube.com/embed/s7L2PVdrb_8?autoplay=1" frameborder="0" allow="autoplay"></iframe>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+ integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+ crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+ integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+ crossorigin=""></script>
+<div id="mapid"></div>
+
+<script>
+var maps = <%= raw @maps.to_json%>;
+var MAP_COORDINATES = [];
+var POP_UP_TEXT = [];
+
+for(i=0; i<maps.length; i++){
+    let map = maps[i];
+    let co_ord = [];
+    co_ord.push(map.latitude);
+    co_ord.push(map.longitude);
+    MAP_COORDINATES.push(co_ord);
+    POP_UP_TEXT.push(map.pop_up_text);
+}
+
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize: [55, 55],
+        iconAnchor: [25, 30],
+        shadowAnchor: [4, 62],
+        popupAnchor: [0, -30]
+    }
+});
+
+var markerIcon = new LeafIcon({
+    iconUrl: '/assets/3playlogo.png'
+})
+
+// Initialize Map
+var mymap = L.map('mapid', {zoomControl: false,fadeAnimation: true} ).setView(MAP_COORDINATES[0], 15);
+ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        id: 'mapbox.streets',
+        maxZoom: 18,
+        accessToken: 'pk.eyJ1Ijoid29va2llLTNwIiwiYSI6ImNqdDA4emJvejA2NGg0M283MzNkZmU2Nm4ifQ.PSTuPN0jOLCSx7GsxG4Ujg'
+    }).addTo(mymap);
+
+function initialize() {
+    var i = 0;
+
+    moveMarker(MAP_COORDINATES[i], i++);
+    
+    var interval;
+
+    //delayed so you can see it move
+    interval = setInterval(() => {
+        var co_ord = MAP_COORDINATES[i];
+        moveMarker(co_ord, i);
+        if (++i == MAP_COORDINATES.length) {
+            clearInterval(interval);
+        }
+    }, 5000);
+}
+
+function moveMarker(co_ord, index) {
+    var marker = L.marker(co_ord, { icon: markerIcon }).addTo(mymap);
+    centerLeafletMapOnMarker(mymap, marker);
+    marker.bindPopup(POP_UP_TEXT[index]).openPopup();
+};
+
+function centerLeafletMapOnMarker(map, marker) {
+    var latLngs = [marker.getLatLng()];
+    var markerBounds = L.latLngBounds(latLngs);
+    map.fitBounds(markerBounds);
+}
+
+setTimeout(() => {
+    initialize();
+}, 3000);
+
+</script>

@@ -1,31 +1,21 @@
-// import React from 'react'
-//
-// export const App = (props) => {
-//   return (<h1>Make It So React</h1>)
-// }
-//
-// export default App
-//
-
-
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import WordTile from './WordTile'
 import WordsIndexContainer from '../containers/WordsIndexContainer'
+import AdminContainer from '../containers/AdminContainer'
+import MapsContainer from '../containers/MapsContainer'
 
 class App extends Component {
 
-
   render() {
     // Removes Devise flash message from page
-    $(function(){
+    $(function () {
       var flashDurationInSeconds = 5;
-      var flashContainerId = 'flash-messages';
+      var flashContainerId = 'flash-notice';
 
       function removeFlashMessages() {
-        if ($('#' + flashContainerId)[0].innerText != "") {
-          $('#' + flashContainerId).remove();
+        if ($('.' + flashContainerId).innerText != "") {
+          $('.' + flashContainerId).remove();
         }
       }
 
@@ -34,9 +24,15 @@ class App extends Component {
 
     return (
       <Router history={browserHistory}>
-        <Route path='/'>
+        <Route path='/games/index'>
           <IndexRoute component={WordsIndexContainer} />
           <Route path='/words' component={WordTile} />
+        </Route>
+        <Route path='/admin/index'>
+          <IndexRoute component={AdminContainer} />
+        </Route>
+        <Route path='/maps/index'>
+          <IndexRoute component={MapsContainer} />
         </Route>
       </Router>
     )
