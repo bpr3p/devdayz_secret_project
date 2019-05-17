@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'games/index'
   get 'clue/index'
   get 'admin/index'
+  get 'teams/index'
 
   resources :clues
   resources :difficulties
