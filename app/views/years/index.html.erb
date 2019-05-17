@@ -1,0 +1,7 @@
+<%= link_to "Add a Year", new_year_path %>
+
+  <ul>
+      <% Year.all.each do |year| %>
+        <li><%= year.year %></li>
+      <% end %>
+  </ul>

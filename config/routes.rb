@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   get 'clue/index'
   get 'admin/index'
   get 'teams/index'
+  get 'years/index'
 
   resources :clues
   resources :difficulties
   resources :teams
   resources :events
   resources :homes
+  resources :years
   devise_for :users
   namespace :api do
     namespace :v1 do
