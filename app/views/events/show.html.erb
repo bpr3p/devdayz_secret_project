@@ -1,0 +1,11 @@
+<%= link_to "Back to Events", events_path %>
+
+<p>
+  <strong>Event Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= Year.find(@event.year_id).year %>
+</p>

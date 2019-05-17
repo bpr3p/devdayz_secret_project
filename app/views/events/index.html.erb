@@ -1,0 +1,12 @@
+<h1>Hello, Events</h1>
+
+<%= link_to "Add an Event", new_event_path %>
+
+<div>
+  <% Year.all.each do |year| %>
+    <h2><%= year.year %></h2>
+    <% Event.where(year_id: year.id).each do |event| %>
+      <%= link_to event.name, event_path(event.id) %>
+    <% end %>
+  <% end %>
+</div>

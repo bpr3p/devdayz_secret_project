@@ -18,6 +18,10 @@ gem 'uglifier', '>= 1.3.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+# Pry is a powerful alternative to the standard IRB shell for Ruby. Allows us to use binding.pry to debug.
+gem 'pry',  '~> 0.10.1'
+# Pry-remote allows us to use binding.pry_remote to debug in dev with Pow's remote session.
+gem 'pry-remote',  '~> 0.1.8'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

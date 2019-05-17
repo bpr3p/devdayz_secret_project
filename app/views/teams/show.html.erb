@@ -1,0 +1,16 @@
+<%= link_to "Back to Teams", teams_path %>
+
+<p>
+  <strong>Team Name:</strong>
+  <%= @team.name %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= Year.find(@team.year_id).year %>
+</p>
+
+<p>
+  <strong>Total Score:</strong>
+  <%= @team.total %>
+</p>

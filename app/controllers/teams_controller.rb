@@ -6,11 +6,7 @@ class TeamsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.json do
-        render json: @team.to_json
-      end
-    end
+    @team = Team.find(params[:id])
   end
 
   def new
