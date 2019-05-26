@@ -12,12 +12,14 @@ class WordsIndexContainer extends Component {
       nb_clues: [],
       clicked_clues: [],
       audioPlaying: false,
-      cancelOption: false
+      cancelOption: false,
+      confetti: false
     }
     this.handleClueClick = this.handleClueClick.bind(this)
     this.playSong = this.playSong.bind(this)
     this.stopSong = this.stopSong.bind(this)
     this.setCancellable = this.setCancellable.bind(this)
+    this.setConfetti = this.setConfetti.bind(this)
   }
 
   audio = new Audio('/sounds/countdown.mp3')
@@ -57,7 +59,7 @@ class WordsIndexContainer extends Component {
    }
    setTimeout(function(){
      old_clicked.push(int)
-     this.setState({ audioPlaying: audioPlaying, clicked_clues: old_clicked });
+     this.setState({ audioPlaying: audioPlaying, clicked_clues: old_clicked, cancelOption: false });
    }.bind(this),8400)
  }
 
@@ -66,7 +68,7 @@ class WordsIndexContainer extends Component {
 
    setTimeout(function(){
      this.setState({ audioPlaying: false, cancelOption: false });
-   }.bind(this),111000)
+   }.bind(this),77000)
  }
 
  setCancellable() {
@@ -76,12 +78,20 @@ class WordsIndexContainer extends Component {
  stopSong() {
    this.audio.pause()
    this.audio.currentTime = 0
-
+   this.setConfetti()
    this.setState({ audioPlaying: false, cancelOption: false });
  }
 
+ setConfetti() {
+   this.setState({ confetti: true })
+   setTimeout(function(){
+     this.setState({ confetti: false });
+   }.bind(this),3500)
+ }
+
   render() {
-    let stopButton
+    let stopButton;
+    let cancelButton;
     let easy_words;
     let medium_words;
     let hard_words;
@@ -90,8 +100,14 @@ class WordsIndexContainer extends Component {
 
     if (this.state.audioPlaying == true) {
       stopButton = <button id="stopButton" onClick={this.stopSong}>STOP THE MUSIC<br/>- WE WON!</button>
-    } else if (this.state.cancelOption == true) {
-      stopButton = <button id="cancelButton" onClick={this.stopSong}>CANCEL</button>
+    }
+    if (this.state.cancelOption == true) {
+      cancelButton = <button id="cancelButton" onClick={this.stopSong}>CANCEL</button>
+    }
+    if (this.state.confetti == true) {
+      document.body.classList.add('confetti')
+    } else {
+      document.body.classList.remove('confetti')
     }
 
     if (this.state.easy_clues) {
@@ -185,8 +201,9 @@ class WordsIndexContainer extends Component {
             <div className="row-header">NAIL BITER</div>
               {nb_words}
           </div>
-          <div className="stopButtonDiv">
+          <div className="ButtonDiv">
           {stopButton}
+          {cancelButton}
           </div>
         </div>
       </div>

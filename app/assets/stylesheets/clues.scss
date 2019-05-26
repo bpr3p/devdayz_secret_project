@@ -76,3 +76,12 @@
   font-weight: 900;
   font-size: 2em;
 }
+
+#cancelButton {
+  background-color: red;
+}
+
+.confetti {
+  background-image: url('/confetti.gif');
+  background-repeat: repeat;
+}
