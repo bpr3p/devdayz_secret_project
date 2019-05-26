@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_19_192249) do
+ActiveRecord::Schema.define(version: 2019_05_17_161557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_04_19_192249) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "difficulty_id"
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_clues_on_event_id"
   end
 
   create_table "difficulties", force: :cascade do |t|
@@ -35,7 +37,8 @@ ActiveRecord::Schema.define(version: 2019_04_19_192249) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "year_id"
+    t.bigint "year_id"
+    t.index ["year_id"], name: "index_events_on_year_id"
   end
 
   create_table "maps", force: :cascade do |t|
