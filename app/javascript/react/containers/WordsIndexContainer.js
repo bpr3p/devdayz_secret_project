@@ -9,15 +9,18 @@ class WordsIndexContainer extends Component {
       easy_clues: [],
       medium_clues: [],
       hard_clues: [],
+      nb_clues: [],
       clicked_clues: [],
-      audioPlaying: false
+      audioPlaying: false,
+      cancelOption: false
     }
     this.handleClueClick = this.handleClueClick.bind(this)
     this.playSong = this.playSong.bind(this)
     this.stopSong = this.stopSong.bind(this)
+    this.setCancellable = this.setCancellable.bind(this)
   }
 
-  audio = new Audio("http://www.orangefreesounds.com/wp-content/uploads/2014/10/Jeopardy-theme-song.mp3")
+  audio = new Audio('/sounds/countdown.mp3')
 
   componentDidMount() {
    fetch(`/api/v1/clues`, {
@@ -34,41 +37,47 @@ class WordsIndexContainer extends Component {
    })
    .then(response => response.json())
    .then(body => {
-     this.setState({ easy_clues: body["clues"]["easy"], medium_clues: body["clues"]["medium"], hard_clues: body["clues"]["hard"] })
+     this.setState({ easy_clues: body["clues"]["easy"], medium_clues: body["clues"]["medium"], hard_clues: body["clues"]["hard"], nb_clues: body["clues"]["nailBiter"] })
    })
    .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
  handleClueClick(event) {
    let int = parseInt(event.target.id)
-   let old_clicked = this.state.clicked_clues
+   let clues = []
    let audioPlaying = this.state.audioPlaying
+   let cancellable = this.state.cancelOption
+   let old_clicked = this.state.clicked_clues
 
-   if (!old_clicked.includes(int)) {
-     old_clicked.push(int)
-   }
 
-   if (!audioPlaying) {
+   if (!audioPlaying && !cancellable) {
      audioPlaying = true
      this.playSong()
+     this.setCancellable()
    }
-
-   this.setState({ clicked_clues: old_clicked, audioPlaying: audioPlaying })
+   setTimeout(function(){
+     old_clicked.push(int)
+     this.setState({ audioPlaying: audioPlaying, clicked_clues: old_clicked });
+   }.bind(this),8400)
  }
 
  playSong() {
    this.audio.play()
 
    setTimeout(function(){
-     this.setState({ audioPlaying: false });
-   }.bind(this),33000)
+     this.setState({ audioPlaying: false, cancelOption: false });
+   }.bind(this),111000)
+ }
+
+ setCancellable() {
+   this.setState({ cancelOption: true })
  }
 
  stopSong() {
    this.audio.pause()
    this.audio.currentTime = 0
 
-   this.setState({ audioPlaying: false });
+   this.setState({ audioPlaying: false, cancelOption: false });
  }
 
   render() {
@@ -76,10 +85,13 @@ class WordsIndexContainer extends Component {
     let easy_words;
     let medium_words;
     let hard_words;
+    let nb_words;
     let cluesById = this.state.clicked_clues
 
     if (this.state.audioPlaying == true) {
       stopButton = <button id="stopButton" onClick={this.stopSong}>STOP THE MUSIC<br/>- WE WON!</button>
+    } else if (this.state.cancelOption == true) {
+      stopButton = <button id="cancelButton" onClick={this.stopSong}>CANCEL</button>
     }
 
     if (this.state.easy_clues) {
@@ -136,22 +148,44 @@ class WordsIndexContainer extends Component {
       })
     }
 
+    if (this.state.nb_clues) {
+      nb_words = this.state.nb_clues.map((clue) => {
+        let word = null
+        if (cluesById.includes(clue.id)) {
+          word = clue.word
+        }
+        return (
+          <WordTile
+          key = {clue.id}
+          id = {clue.id}
+          word = {word}
+          handleClueClick = {this.handleClueClick}
+          difficulty_id = {clue.difficulty_id}
+          />
+        )
+      })
+    }
+
     return (
       <div className="parent-div">
         <div className="grid-container">
-          <div className="easy-column grid-item1">
+          <div className="easy-column">
             <div className="row-header">EASY</div>
             {easy_words}
           </div>
-          <div className="medium-column grid-item2">
+          <div className="medium-column">
             <div className="row-header">MEDIUM</div>
             {medium_words}
           </div>
-          <div className="hard-column grid-item3">
+          <div className="hard-column">
             <div className="row-header">HARD</div>
               {hard_words}
           </div>
-          <div className="stopButtonDiv grid-item4">
+          <div className="nb-column">
+            <div className="row-header">NAIL BITER</div>
+              {nb_words}
+          </div>
+          <div className="stopButtonDiv">
           {stopButton}
           </div>
         </div>
