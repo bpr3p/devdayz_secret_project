@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'admin/index'
   get 'teams/index'
   get 'years/index'
+  post 'set_year', to: 'years#set_year', as: :set_year
 
   resources :clues
   resources :difficulties
