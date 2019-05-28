@@ -1,7 +1,12 @@
 <%= link_to "Add a Year", new_year_path %>
 
   <ul>
-      <% Year.all.each do |year| %>
-        <li><%= year.year %></li>
-      <% end %>
+    <% Year.all.each do |year| %>
+      <li><%= year.year %></li>
+    <% end %>
   </ul>
+
+<%= form_for :year, url: { action: "set_year" } do |f| %>
+  <%= f.collection_select :year_id, Year.order(:year), :id, :year, include_blank: false, selected_value: @current_year || nil %>
+  <%= f.submit %>
+<% end %>

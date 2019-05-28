@@ -1,8 +1,9 @@
 class YearsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @years = Year.all
+    @current_year = Year.find_by(current: true)
   end
 
   def new
@@ -11,6 +12,14 @@ class YearsController < ApplicationController
 
   def show
     @year = Year.find(params[:id])
+  end
+
+  def set_year
+    old_year = Year.find_by(current: true)
+    old_year&.update_attributes(current: false)
+    new_year = Year.find(params[:year][:year_id].to_i)
+    new_year.update_attributes(current: true)
+    render :index
   end
 
   def create
@@ -34,4 +43,3 @@ class YearsController < ApplicationController
   end
 
 end
-
