@@ -60,33 +60,82 @@
 }
 
 .easy-column {
-  background-color: green;
+  background-color: rgba(0,128,0,.4);
   grid-column-start: 1;
   grid-column-end: 2;
 }
 
 .medium-column {
-  background-color: yellow;
+  background-color: rgba(255,255,0,.3);
   grid-column-start: 2;
   grid-column-end: 3;
 }
 
 .hard-column {
-  background-color: red;
+  background-color: rgba(255,0,0,.4);
   grid-column-start: 3;
   grid-column-end: 4;
 }
 
 .nb-column {
-  background-color: black;
-  color: white;
+  background-color: rgba(0,0,0,.4);
   grid-column-start: 4;
   grid-column-end: 5;
 }
 
 .row-header {
-  font-weight: 900;
-  font-size: 2em;
+  font-weight: 700;
+  font-size: 1.8em;
+  padding: 10px 0px;
+}
+
+.emoji-container {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  left: -10px;
+}
+
+.header-label {
+  display: block;
+  clear: both;
+}
+
+.emoji-animation-1 {
+  animation-name: rotate1;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  position: absolute;
+}
+
+.emoji-animation-2 {
+  animation-name: rotate1;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  position: absolute;
+}
+
+@keyframes rotate1 {
+  from {
+    transform: rotate(15deg);
+  }
+  to {
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes rotate2 {
+  from {
+    transform: rotate(-15deg);
+  }
+  to {
+    transform: rotate(15deg);
+  }
 }
 
 #cancelButton {

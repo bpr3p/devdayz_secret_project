@@ -215,20 +215,20 @@ class WordsIndexContainer extends Component {
     return (
       <div className="parent-div">
         <div className="grid-container">
-          <div className="easy-column">
-            <div className="row-header">EASY</div>
+        <div className="easy-column">
+            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-1" role="img" aria-label="baby">👶</span></div>&nbsp;<div className="header-label">EASY</div></div>
             {easy_words}
           </div>
           <div className="medium-column">
-            <div className="row-header">MEDIUM</div>
+            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-2" role="img" aria-label="grimacing face">😬</span></div>&nbsp;<div className="header-label">MEDIUM</div></div>
             {medium_words}
           </div>
           <div className="hard-column">
-            <div className="row-header">HARD</div>
+            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-1" role="img" aria-label="skull">💀</span></div>&nbsp;<div className="header-label">HARD</div></div>
               {hard_words}
           </div>
           <div className="nb-column">
-            <div className="row-header">NAIL BITER</div>
+            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-2" role="img" aria-label="japanese ogre">👹</span></div>&nbsp;<div className="header-label">NAIL BITER</div></div>
               {nb_words}
           </div>
           <div className="cancelButtonDiv">
