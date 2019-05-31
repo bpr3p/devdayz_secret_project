@@ -21,6 +21,8 @@ class WordsIndexContainer extends Component {
     this.stopSongCancel = this.stopSongCancel.bind(this)
     this.setCancellable = this.setCancellable.bind(this)
     this.setConfetti = this.setConfetti.bind(this)
+    this.resetWord = this.resetWord.bind(this)
+    this.stopCheerConfetti = this.stopCheerConfetti.bind(this)
   }
 
   audio = new Audio('/sounds/countdown.mp3')
@@ -48,11 +50,11 @@ class WordsIndexContainer extends Component {
 
  handleClueClick(event) {
    let int = parseInt(event.target.id)
-   let clues = []
    let audioPlaying = this.state.audioPlaying
    let cancellable = this.state.cancelOption
    let old_clicked = this.state.clicked_clues
-
+   this.cheer.pause()
+   this.cheer.currentTime = 0
 
    if (!audioPlaying && !cancellable) {
      audioPlaying = true
@@ -89,9 +91,26 @@ class WordsIndexContainer extends Component {
    this.setState({ audioPlaying: false, cancelOption: false });
  }
 
+ stopCheerConfetti() {
+   this.cheer.pause()
+   this.cheer.currentTime = 0
+   this.setState({ confetti: false })
+ }
+
+ resetWord(event) {
+   let old_clicked = this.state.clicked_clues
+   let int = parseInt(event.target.id)
+   let index = old_clicked.indexOf(int)
+   old_clicked.splice(index, 1)
+   this.stopSongCancel()
+   this.stopCheerConfetti()
+   clearTimeout(this.confetti)
+   this.setState({ clicked_clues: old_clicked })
+ }
+
  setConfetti() {
    this.setState({ confetti: true })
-   setTimeout(function(){
+   this.confetti = setTimeout(function(){
      this.setState({ confetti: false });
    }.bind(this),7500)
  }
@@ -129,6 +148,7 @@ class WordsIndexContainer extends Component {
           id = {clue.id}
           word = {word}
           handleClueClick = {this.handleClueClick}
+          resetWord = {this.resetWord}
           difficulty_id = {clue.difficulty_id}
           />
         )
@@ -147,6 +167,7 @@ class WordsIndexContainer extends Component {
           id = {clue.id}
           word = {word}
           handleClueClick = {this.handleClueClick}
+          resetWord = {this.resetWord}
           difficulty_id = {clue.difficulty_id}
           />
         )
@@ -165,6 +186,7 @@ class WordsIndexContainer extends Component {
           id = {clue.id}
           word = {word}
           handleClueClick = {this.handleClueClick}
+          resetWord = {this.resetWord}
           difficulty_id = {clue.difficulty_id}
           />
         )
@@ -183,6 +205,7 @@ class WordsIndexContainer extends Component {
           id = {clue.id}
           word = {word}
           handleClueClick = {this.handleClueClick}
+          resetWord = {this.resetWord}
           difficulty_id = {clue.difficulty_id}
           />
         )
