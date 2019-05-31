@@ -163,7 +163,9 @@ class MapsContainer extends Component {
 
         return (
             <Container className="container-body pt-2">
-                <h4>Maps</h4>
+                <Row>
+                    <h4>Maps </h4>
+                </Row>
                 <Row>
                     <Table>
                         <thead>
@@ -196,9 +198,9 @@ class MapsContainer extends Component {
 
                 <hr></hr>
                 <Row>
-                    <Col sm={12}>
-                        <h4>{this.state.editing ? "Edit Record" : "Add Record"} </h4>
-                    </Col>
+                <h4>{this.state.editing ? "Edit Record" : "Add Record"} </h4>
+                </Row>
+                <Row>
                     <Form>
                         <FormGroup>
                             <Label for="latitude">Latitude</Label>

@@ -1,3 +1,5 @@
+<div class="container">
+<h2>Edit Word</h2>
 <%= form_for @clue do |form| %>
   <div id="word-field">
     <%= form.label :word, 'Word' %>
@@ -19,3 +21,4 @@
     <%= link_to 'Delete', clue_path(@clue), method: :delete, data: { confirm: 'Are you sure?' }, class: "button", id: "delete-button" %>
   </div>
 <% end %>
+</div>
