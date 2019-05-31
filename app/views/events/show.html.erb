@@ -13,13 +13,20 @@
 
 
 <%= form_tag update_scores_scores_url, :method => :put do |f| %>
-  <ul>
-  <% for score in @event.scores %>
-    <li>
-      <%= hidden_field_tag "score_ids[]", score.id %>
-      <%= text_field_tag "score_values[]", score.value %>
-    </li>
-  <% end %>
-  </ul>
+  <%= hidden_field_tag "event_id", @event.id %>
+
+  <table>
+    <tr>
+      <th>Team</th>
+      <th>Score</th>
+    </tr>
+
+    <% for team in @event.year.teams.order(:id) %>
+      <tr>
+        <td><%=team.name-%></td>
+        <td><input name="scores[<%= team.id %>]" value="<%= team.scores.find_by(event_id: @event.id)&.value %>"></input></td>
+      </tr>
+    <% end %>
+  </table>
   <input type="submit" name="commit" method="put" value="Submit" />
 <% end %>

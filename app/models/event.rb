@@ -9,13 +9,13 @@ class Event < ApplicationRecord
   end
 
   def initialize_client
-    @client = Firebase::Event.new
+    @client = Firebase::Event.new(self)
   end
 
   private
 
   def firebase_update
     initialize_client
-    @client.create_or_sync(self)
+    @client.create_or_sync_in_cloud
   end
 end
