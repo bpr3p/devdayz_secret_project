@@ -10,9 +10,13 @@ class WordTile extends Component {
     if (this.props.word == null) {
       clueDiv = <div className="blank-clue-block" id={this.props.id} onClick={this.props.handleClueClick}>REVEAL</div>
     } else {
-      clueDiv = <div className="clue-block" id={this.props.id}>
-        {this.props.word}
-      </div>
+      clueDiv = <div className="outer-clue-block">
+        <div className="clue-block" id={this.props.id}>
+          {this.props.word}
+
+        <p className="reset-word ${this.props.id}" onClick={this.props.resetWord}>Reset</p>
+        </div>
+        </div>
     }
     return (
       clueDiv

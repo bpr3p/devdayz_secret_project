@@ -16,7 +16,7 @@
 .blank-clue-block {
   align-self: center;
   background-color: black;
-  margin: .5em 0em .5em 0em;
+  margin: 1.5em 0em .5em 0em;
   color: white;
   text-align: center;
   height: 3em;
@@ -168,4 +168,43 @@
 
 #delete-button {
   background-color: red;
+}
+
+.reset-word {
+  color: #c9ced6;
+  text-align: center;
+  width: 45px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px;
+}
+
+.difficulty-item {
+  margin-bottom: 0;
+}
+
+.year-item {
+  margin-top: 1.5em;
+}
+
+#add-word-btn {
+  margin-bottom: -15px;
+}
+
+.edit-link {
+  display: none;
+  margin-left: 1em;
+}
+
+.clue-item {
+  display: flex;
+  margin-right: 1em;
+}
+
+.clue-item:hover .edit-link {
+  display: block;
+}
+
+#clue-index {
+  margin-left: 2em;
 }
