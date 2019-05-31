@@ -35,6 +35,7 @@ gem 'pry-remote',  '~> 0.1.8'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'firebase'
 
 group :development, :test do
 
@@ -63,5 +64,6 @@ gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
 gem 'foundation-rails', '~> 5.0'
 gem 'webpacker', '~> 3.3'
+gem 'bootstrap'
 
 gem 'rails_12factor', group: :production

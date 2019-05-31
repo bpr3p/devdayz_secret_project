@@ -1,16 +1,20 @@
-<%= link_to "Back to Teams", teams_path %>
+<div class="container">
+  <%= button_to "Back to Teams", teams_path, method: :get, class: "btn btn-primary btn-sm" %>
 
-<p>
-  <strong>Team Name:</strong>
-  <%= @team.name %>
-</p>
+  <div class="card mt-3">
+    <p>
+      <strong>Team Name:</strong>
+      <%= @team.name %>
+    </p>
 
-<p>
-  <strong>Year:</strong>
-  <%= Year.find(@team.year_id).year %>
-</p>
+    <p>
+      <strong>Year:</strong>
+      <%= Year.find(@team.year_id).year %>
+    </p>
 
-<p>
-  <strong>Total Score:</strong>
-  <%= @team.total %>
-</p>
+    <p>
+      <strong>Total Score:</strong>
+      <%= @team.total %>
+    </p>
+  </div>
+</div>
