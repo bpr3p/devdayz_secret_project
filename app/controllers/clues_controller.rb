@@ -1,6 +1,6 @@
 class CluesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @clues = Clue.all
   end
@@ -16,11 +16,25 @@ class CluesController < ApplicationController
   def create
     @clue = Clue.new(clue_params)
     @clue.save
-    redirect_to @clue
+    render action: "index"
+  end
+
+  def edit
+    @clue = Clue.find(params[:id])
+  end
+
+  def update
+    Clue.find(params[:id]).update_attributes(clue_params)
+    render action: "index"
+  end
+
+  def destroy
+    Clue.find(params[:id]).destroy
+    render action: "index"
   end
 
   private
     def clue_params
-      params.require(:clue).permit(:word, :difficulty_id)
+      params.require(:clue).permit(:word, :difficulty_id, :event_id)
     end
 end
