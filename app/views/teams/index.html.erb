@@ -1,6 +1,7 @@
-<h1>Hello, Teams</h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<h1>Plympics Teams!</h1>
 
-<%= link_to "Add a Team", new_team_path %>
+<%= button_to "Add a Team", new_team_path, class: "btn btn-success btn-sm", style: "display: inline;"%>
 
 <div>
   <% Year.all.each do |year| %>
@@ -8,5 +9,6 @@
     <% Team.where(year_id: year.id).each do |team| %>
       <%= link_to team.name, team_path(team.id) %>
     <% end %>
+    <hr/>
   <% end %>
 </div>
