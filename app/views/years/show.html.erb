@@ -4,3 +4,8 @@
   <strong>Year:</strong>
   <%= @year.year %>
 </p>
+
+<%= javascript_tag do %>
+ $('li').removeClass('active');
+ $('.years').addClass('active');
+<% end %>

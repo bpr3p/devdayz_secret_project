@@ -16,8 +16,6 @@
 
  */
 
- @import 'bootstrap';
-
 body {
     font-family: 'Poppins', sans-serif;
  }
@@ -31,7 +29,20 @@ body {
      color: aliceblue
  }
 
- .btn-xs {
+/* import the necessary Bootstrap files */
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+$theme-colors: (
+  primary: #007bff,
+  blue: #007bff
+);
+
+/* finally, import Bootstrap */
+@import "bootstrap";
+
+.btn-xs {
     padding  : .25rem .4rem;
     font-size  : .875rem;
     line-height  : .5;

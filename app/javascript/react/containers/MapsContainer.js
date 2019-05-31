@@ -162,7 +162,8 @@ class MapsContainer extends Component {
         let maps = this.state.maps;
 
         return (
-            <Container className="container-body">
+            <Container className="container-body pt-2">
+                <h4>Maps</h4>
                 <Row>
                     <Table>
                         <thead>

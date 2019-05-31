@@ -1,32 +1,38 @@
-<%= link_to "Back to Events", events_path %>
+<div class="container pt-2">
 
-<p>
-  <strong>Event Name:</strong>
-  <%= @event.name %>
-</p>
+<%= button_to "Back to Events", events_path, method: :get, class: "btn btn-primary btn-sm" %>
 
-<p>
-  <strong>Year:</strong>
-  <%= Year.find(@event.year_id).year %>
-</p>
+<div class="card p-2 mt-2 w-50">
+  <p>
+    <strong>Event Name:</strong>
+    <%= @event.name %>
+  </p>
 
+  <p>
+    <strong>Year:</strong>
+    <%= Year.find(@event.year_id).year %>
+  </p>
 
+  <%= form_tag update_scores_scores_url, :method => :put do |f| %>
+    <%= hidden_field_tag "event_id", @event.id %>
 
-<%= form_tag update_scores_scores_url, :method => :put do |f| %>
-  <%= hidden_field_tag "event_id", @event.id %>
-
-  <table>
-    <tr>
-      <th>Team</th>
-      <th>Score</th>
-    </tr>
-
-    <% for team in @event.year.teams.order(:id) %>
+    <table>
       <tr>
-        <td><%=team.name-%></td>
-        <td><input name="scores[<%= team.id %>]" value="<%= team.scores.find_by(event_id: @event.id)&.value %>"></input></td>
+        <th>Team</th>
+        <th>Score</th>
       </tr>
-    <% end %>
-  </table>
-  <input type="submit" name="commit" method="put" value="Submit" />
+
+      <% for team in @event.year.teams.order(:id) %>
+        <tr>
+          <td><%=team.name-%></td>
+          <td><input name="scores[<%= team.id %>]" value="<%= team.scores.find_by(event_id: @event.id)&.value %>"></input></td>
+        </tr>
+      <% end %>
+    </table>
+    <input class="btn btn-success btn-sm" type="submit" name="commit" method="put" value="Submit" />
+  <% end %>
+</div>
+<%= javascript_tag do %>
+ $('li').removeClass('active');
+ $('.events').addClass('active');
 <% end %>

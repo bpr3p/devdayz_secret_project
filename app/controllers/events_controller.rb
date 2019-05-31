@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    @year_id = params[:year_id]
     @event = Event.new
   end
 
