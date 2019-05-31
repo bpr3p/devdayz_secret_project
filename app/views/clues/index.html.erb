@@ -1,15 +1,24 @@
-<p></p>
-<ul>
-  <% Year.all.sort_by(&:year).each do |year| %>
-    <li><%= year.year %></li>
-    <ul>
-      <% Clue.where(event_id: Event.pictionary.find_by(year: year)).sort_by(&:word).each do |clue| %>
-        <li>
-          <%= clue.word %> <%= link_to 'Edit', edit_clue_path(clue) %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</ul>
+<div id="clue-index">
 
-<%= link_to "Add a Word", new_clue_path, class: "button" %>
+  <p></p>
+  <%= link_to "Add a Word", new_clue_path, class: "button", id: "add-word-btn" %>
+  <ul>
+    <% Year.all.sort_by(&:year).reverse!.each do |year| %>
+      <h3 class="year-item"><%= year.year %></h3>
+      <ul>
+        <% Difficulty.all.sort_by(&:id).each do |difficulty| %>
+          <li>
+            <h5 class="difficulty-item"><%= difficulty.name%></h5>
+            <ul>
+              <% Clue.where(event_id: Event.pictionary.find_by(year: year), difficulty_id: difficulty.id).sort_by(&:word).each do |clue| %>
+                <li class="clue-item">
+                  <%= clue.word %><span class="edit-link"><%= link_to 'Edit', edit_clue_path(clue) %></span>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </ul>
+</div>

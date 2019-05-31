@@ -178,3 +178,34 @@
   margin-right: auto;
   margin-top: -20px;
 }
+
+.difficulty-item {
+  // font-weight: 900;
+  margin-bottom: 0;
+}
+
+.year-item {
+  margin-top: 1.5em;
+}
+
+#add-word-btn {
+  margin-bottom: -15px;
+}
+
+.edit-link {
+  display: none;
+  margin-left: 1em;
+}
+
+.clue-item {
+  display: flex;
+  margin-right: 1em;
+}
+
+.clue-item:hover .edit-link {
+  display: block;
+}
+
+#clue-index {
+  margin-left: 2em;
+}

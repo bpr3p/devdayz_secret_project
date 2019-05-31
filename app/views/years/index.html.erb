@@ -1,15 +1,20 @@
-<%= link_to "Add a Year", new_year_path %>
+<div id="year-page">
+  <p></p>
 
   <ul>
-    <% Year.all.each do |year| %>
+    <% Year.all.sort_by(&:year).each do |year| %>
       <li><%= year.year %></li>
     <% end %>
   </ul>
+  <%= link_to "Add a Year", new_year_path %>
 
-<div class="new-year-form">
-  <%= form_for :year, url: { action: "set_year" } do |f| %>
-    <%= f.label "Set current year:" %>
-    <%= f.collection_select :year_id, Year.order(:year), :id, :year, include_blank: false, selected: @current_year.id %>
-    <%= f.submit "Set year"%>
-  <% end %>
+  <br />
+  <br />
+  <div class="new-year-form">
+    <%= form_for :year, url: { action: "set_year" } do |f| %>
+      <%= f.label "Set current year:" %>
+      <%= f.collection_select :year_id, Year.order(:year), :id, :year, include_blank: false, selected: @current_year.id %>
+      <%= f.submit "Set year"%>
+    <% end %>
+  </div>
 </div>

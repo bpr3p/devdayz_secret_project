@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2019_05_27_233344) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "firebase_id"
     t.bigint "year_id"
+    t.string "firebase_id"
     t.index ["year_id"], name: "index_events_on_year_id"
   end
 
