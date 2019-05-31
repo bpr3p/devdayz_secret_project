@@ -1,10 +1,17 @@
-<%= form_for @year do |form| %>
-  <p>
-    <%= form.label :year %><br>
-    <%= form.text_field :year %>
-  </p>
+<div class="container">
+  <%= form_for @year do |form| %>
+    <p>
+      <%= form.label :year %>
+      <%= form.text_field :year %>
+    </p>
 
-  <p>
-    <%= form.submit %>
-  </p>
+    <p>
+      <%= form.submit class: "btn btn-success btn-sm" %>
+    </p>
+  <% end %>
+</div>
+
+<%= javascript_tag do %>
+ $('li').removeClass('active');
+ $('.years').addClass('active');
 <% end %>

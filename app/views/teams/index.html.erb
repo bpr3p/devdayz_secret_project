@@ -1,11 +1,11 @@
 <div class="container">
 <h1>Plympics Teams!</h1>
 
-<div class="card p-2">
+<div class="card p-2 w-50">
   <% Year.all.order(:id).each_with_index do |year, index| %>
     <div>
       <h2 style="vertical-align: -webkit-baseline-middle; display: inline-block;"><%= year.year %></h2>
-      <%= button_to "Add a Team", new_team_path, method: :get, params: {year_id: year.id}, form: {style: 'display:inline-block;'}, class: "btn btn-success btn-sm", style: "display: inline;"%>
+      <%= button_to "Add a Team", new_team_path, method: :get, params: {year_id: year.id}, form: {style: 'display:inline-block;'}, class: "btn btn-success btn-sm", style: "display: inline;" %>
     </div>
     <ol>
     <% Team.where(year_id: year.id).each do |team| %>
@@ -21,3 +21,8 @@
     <% end %>
   <% end %>
 </div>
+
+<%= javascript_tag do %>
+ $('li').removeClass('active');
+ $('.teams').addClass('active');
+<% end %>

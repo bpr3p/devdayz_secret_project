@@ -1,20 +1,26 @@
-<%= form_for @event do |form| %>
-  <p>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </p>
+<div class="container pt-2">
+  <h3>Create New Event</h3>
+  <div class="card p-2">
+    <%= form_for @event do |form| %>
+      <p>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+      </p>
 
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_field :description %>
-  </p>
+      <p>
+        <%= form.label :description %><br>
+        <%= form.text_field :description %>
+      </p>
 
-  <p>
-    <%= form.label :year_id %><br>
-    <%= form.select(:year_id, options_for_select(Year.all.collect {|p| [ p.year, p.id ] }), { include_blank: false }) %>
-  </p>
+      <%= hidden_field(:event, :year_id, value: @year_id) %>
 
-  <p>
-    <%= form.submit %>
-  </p>
+      <p>
+        <%= form.submit class: "btn btn-success btn-sm" %>
+      </p>
+    <% end %>
+  </div>
+</div>
+<%= javascript_tag do %>
+ $('li').removeClass('active');
+ $('.events').addClass('active');
 <% end %>

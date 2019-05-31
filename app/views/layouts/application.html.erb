@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DevdayzSecretProject</title>
+  <title>3Plympics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -19,7 +19,8 @@
   <nav class="top-bar">
     <ul class="title-area">
       <li class="site-name">
-        <h4>DevdayzSecretProject</h4>
+        <img src="<%= asset_path('3playlogo.png') %>" style="height: 20px; vertical-align: initial">
+        <h4 style="display: inline">3Plympics</h4>
       </li>
     </ul>
 
@@ -38,7 +39,6 @@
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
           <li><%= link_to 'Sign In', new_user_session_path %></li>
         <%- end -%>
       </ul>
@@ -63,5 +63,6 @@
   <%= javascript_pack_tag 'application' %>
 
   <%= yield :extra_footer %>
+
 </body>
 </html>

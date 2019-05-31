@@ -1,20 +1,26 @@
-<div id="year-page">
-  <p></p>
+<div class="container pt-2">
 
-  <ul>
-    <% Year.all.sort_by(&:year).each do |year| %>
+  <%= button_to "Add a Year", new_year_path, class: "btn btn-primary btn-sm", method: :get %>
+
+  <ol>
+    <% Year.all.order(:id).each do |year| %>
       <li><%= year.year %></li>
     <% end %>
-  </ul>
-  <%= link_to "Add a Year", new_year_path %>
+  </ol>
 
-  <br />
-  <br />
-  <div class="new-year-form">
+  <hr/>
+
+  <div>
     <%= form_for :year, url: { action: "set_year" } do |f| %>
       <%= f.label "Set current year:" %>
-      <%= f.collection_select :year_id, Year.order(:year), :id, :year, include_blank: false, selected: @current_year.id %>
-      <%= f.submit "Set year"%>
+      <%= f.collection_select :year_id, Year.order(:id), :id, :year, include_blank: false, selected: @current_year.id%>
+      <%= f.submit "Set year",  class: "btn btn-success btn-sm" %>
     <% end %>
   </div>
+
 </div>
+
+<%= javascript_tag do %>
+ $('li').removeClass('active');
+ $('.years').addClass('active');
+<% end %>
