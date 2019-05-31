@@ -16,7 +16,6 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-https://git.heroku.com/gentle-depths-79343.git
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Pry is a powerful alternative to the standard IRB shell for Ruby. Allows us to use binding.pry to debug.
