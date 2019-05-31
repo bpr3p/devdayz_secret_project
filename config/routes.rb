@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'admin/index'
   get 'teams/index'
   get 'years/index'
+  get 'events/index'
   post 'set_year', to: 'years#set_year', as: :set_year
 
   resources :clues
@@ -14,6 +15,11 @@ Rails.application.routes.draw do
   resources :events
   resources :homes
   resources :years
+  resources :scores do
+    collection do
+      put :update_scores
+    end
+  end
   devise_for :users
   namespace :api do
     namespace :v1 do
