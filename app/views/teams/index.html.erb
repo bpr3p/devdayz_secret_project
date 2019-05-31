@@ -1,14 +1,23 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="container">
 <h1>Plympics Teams!</h1>
 
-<%= button_to "Add a Team", new_team_path, class: "btn btn-success btn-sm", style: "display: inline;"%>
-
-<div>
-  <% Year.all.each do |year| %>
-    <h2><%= year.year %></h2>
+<div class="card p-2">
+  <% Year.all.order(:id).each_with_index do |year, index| %>
+    <div>
+      <h2 style="vertical-align: -webkit-baseline-middle; display: inline-block;"><%= year.year %></h2>
+      <%= button_to "Add a Team", new_team_path, method: :get, params: {year_id: year.id}, form: {style: 'display:inline-block;'}, class: "btn btn-success btn-sm", style: "display: inline;"%>
+    </div>
+    <ol>
     <% Team.where(year_id: year.id).each do |team| %>
-      <%= link_to team.name, team_path(team.id) %>
+      <li class="teams-listing">
+        <%= link_to team.name, team_path(team.id) %>
+        <%= button_to "Delete", team_path(id: team.id), method: :delete, 'data-remote': true, form: {style: 'display:inline-block; float: right'}, class: "btn btn-outline-danger btn-xs", style: "display: inline;" %>
+      </li>
     <% end %>
-    <hr/>
+    </ol>
+    
+    <% if index != Year.all.length - 1 %>
+      <hr/> 
+    <% end %>
   <% end %>
 </div>

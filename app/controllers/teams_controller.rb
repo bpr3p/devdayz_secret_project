@@ -11,6 +11,7 @@ class TeamsController < ApplicationController
   end
 
   def new
+    @year_id = params[:year_id]
     @team = Team.new
   end
 
@@ -21,8 +22,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
-        format.json { render :show, status: :created, location: @team }
+        format.html { render :index, notice: 'Team was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @team.errors, status: :unprocessable_entity }
@@ -42,12 +42,12 @@ class TeamsController < ApplicationController
     end
   end
 
- # DELETE /recipes/1
- # DELETE /recipes/1.json
   def destroy
-    @team.destroy
+    id = params[:id]
+    team = Team.find(id)
+    team.destroy
       respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to teams_url, notice: 'Team was successfully deleted.' }
       format.json { head :no_content }
     end
   end
