@@ -7,6 +7,6 @@
   </ul>
 
 <%= form_for :year, url: { action: "set_year" } do |f| %>
-  <%= f.collection_select :year_id, Year.order(:year), :id, :year, include_blank: false, selected_value: @current_year || nil %>
+  <%= f.collection_select :year_id, Year.order(:year), :id, :year, include_blank: false, selected: @current_year.id %>
   <%= f.submit %>
 <% end %>
