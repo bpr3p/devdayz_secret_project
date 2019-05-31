@@ -24,11 +24,23 @@
   font-size: 1.5em;
 }
 
-.stopButtonDiv {
-  margin: 3em auto 0em auto;
+.winButtonDiv {
+  height: 100px;
   width: 10em;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.cancelButtonDiv {
+  height: 100px;
   grid-column-start: 2;
   grid-column-end: 3;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
 }
 
 .grid-container {
@@ -128,9 +140,32 @@
 
 #cancelButton {
   background-color: red;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#winButton {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .confetti {
   background-image: url('/confetti.gif');
   background-repeat: repeat;
+}
+
+#word-field {
+  width: 200px;
+}
+
+#difficulty-field {
+  width: 200px;
+}
+
+#year-field {
+  width: 200px;
+}
+
+#delete-button {
+  background-color: red;
 }
