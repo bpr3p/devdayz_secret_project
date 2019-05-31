@@ -15,8 +15,7 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit 'Submit', class: 'button' %>
+    <%= link_to 'Delete', clue_path(@clue), method: :delete, data: { confirm: 'Are you sure?' }, class: "button", id: "delete-button" %>
   </div>
 <% end %>
-
-<%= link_to 'Delete', clue_path(@clue), method: :delete, data: { confirm: 'Are you sure?' }, class: "button delete-button" %>

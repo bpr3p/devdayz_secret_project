@@ -1,14 +1,15 @@
-<%= link_to "Add a Word", new_clue_path %>
+<p></p>
+<ul>
+  <% Year.all.sort_by(&:year).each do |year| %>
+    <li><%= year.year %></li>
+    <ul>
+      <% Clue.where(event_id: Event.pictionary.find_by(year: year)).sort_by(&:word).each do |clue| %>
+        <li>
+          <%= clue.word %> <%= link_to 'Edit', edit_clue_path(clue) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>
 
-  <ul>
-    <% Year.all.sort_by(&:year).each do |year| %>
-      <li><%= year.year %></li>
-      <ul>
-        <% Clue.where(event_id: Event.pictionary.find_by(year: year)).sort_by(&:word).each do |clue| %>
-          <li>
-            <%= clue.word %> <%= link_to 'Edit', edit_clue_path(clue) %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </ul>
+<%= link_to "Add a Word", new_clue_path, class: "button" %>

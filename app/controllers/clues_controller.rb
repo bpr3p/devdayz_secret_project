@@ -1,6 +1,6 @@
 class CluesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @clues = Clue.all
   end
@@ -24,7 +24,6 @@ class CluesController < ApplicationController
   end
 
   def update
-    binding.remote_pry
     Clue.find(params[:id]).update_attributes(clue_params)
     render action: "index"
   end
