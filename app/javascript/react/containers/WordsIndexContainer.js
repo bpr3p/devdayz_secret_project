@@ -24,6 +24,7 @@ class WordsIndexContainer extends Component {
   }
 
   audio = new Audio('/sounds/countdown.mp3')
+  cheer = new Audio('/sounds/cheer.mp3')
 
   componentDidMount() {
    fetch(`/api/v1/clues`, {
@@ -57,11 +58,9 @@ class WordsIndexContainer extends Component {
      audioPlaying = true
      this.playSong()
      this.setCancellable()
-   }
-   this.revealClue = setTimeout(function(){
      old_clicked.push(int)
-     this.setState({ audioPlaying: audioPlaying, clicked_clues: old_clicked });
-   }.bind(this),8400)
+     this.setState({ audioPlaying: audioPlaying, clicked_clues: old_clicked })
+   }
  }
 
  playSong() {
@@ -79,6 +78,7 @@ class WordsIndexContainer extends Component {
  stopSongWin() {
    this.audio.pause()
    this.audio.currentTime = 0
+   this.cheer.play()
    this.setConfetti()
    this.setState({ audioPlaying: false, cancelOption: false });
  }
@@ -86,7 +86,6 @@ class WordsIndexContainer extends Component {
  stopSongCancel() {
    this.audio.pause()
    this.audio.currentTime = 0
-   clearTimeout(this.revealClue);
    this.setState({ audioPlaying: false, cancelOption: false });
  }
 
@@ -94,7 +93,7 @@ class WordsIndexContainer extends Component {
    this.setState({ confetti: true })
    setTimeout(function(){
      this.setState({ confetti: false });
-   }.bind(this),3500)
+   }.bind(this),7500)
  }
 
   render() {
