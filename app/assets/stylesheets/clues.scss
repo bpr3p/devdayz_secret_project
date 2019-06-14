@@ -138,6 +138,11 @@
   }
 }
 
+.word-list {
+  display: none;
+  overflow: hidden;
+}
+
 #cancelButton {
   background-color: red;
   margin-top: 0;
@@ -185,6 +190,20 @@
 
 .year-item {
   margin-top: 1.5em;
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 130px;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 25px;
+}
+
+.active, .year-item:hover {
+  background-color: #ccc;
 }
 
 #add-word-btn {

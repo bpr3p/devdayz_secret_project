@@ -11,6 +11,7 @@ class CluesController < ApplicationController
 
   def new
     @clue = Clue.new
+    @current_year = Year.current
   end
 
   def create
