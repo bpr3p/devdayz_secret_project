@@ -46,6 +46,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event = Event.find(params[:id])
     @event.destroy
       respond_to do |format|
       format.html { redirect_to teams_url, notice: 'Event was successfully destroyed.' }

@@ -9,6 +9,11 @@ class Team < ApplicationRecord
     @client = Firebase::Team.new(self)
   end
 
+  def firebase_update_scores
+    initialize_client
+    @client.update_score
+  end
+
   private
 
   def firebase_update
