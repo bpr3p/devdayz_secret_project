@@ -2,3 +2,181 @@
   height: 95vh; 
   width: 100%;
 }
+
+#teams, #plympics{ 
+  background: white;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-150px; /* this is half the height of your div*/  
+  margin-left:-200px; /*this is half of width of your div*/
+  height: 300px;
+  width: 400px;
+  z-index: 1001;
+  border-radius: 10px;
+  display: none;
+}
+
+.team-names{
+  text-align: center;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+
+html,body {
+  margin: 0;
+  padding: 0;
+  font-family:'Lato', sans-serif;
+}
+
+.loader {
+  width: 200px;
+  height: 80px;
+  position: absolute;
+  top: 0; right: 0; left: 0; bottom: 0;
+  margin: auto;
+}
+
+.loading-text {
+  text-align: center;
+  margin: 20px 0;
+  color: #888888;
+  font-size: 20px;
+}
+
+.loading-text::before {
+  content: "Loading your games ";	
+}
+
+.loading-text::after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4,end) 1.3s infinite;      
+  animation: ellipsis steps(4,end) 1.3s infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0;
+  margin-right: 20px;
+}
+
+@keyframes ellipsis {
+  to {
+  width: 20px; 
+  margin-right: 0;   
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.loading-logo, .loading-logo span {
+  display: block;
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
+  pointer-events: none;
+  color: #00B2EE;
+  text-align: center;
+  margin: 0 auto;
+  -webkit-transform: rotateZ(5deg);
+          transform: rotateZ(5deg);
+  border-radius: 100%;
+}
+
+ .loading-logo:before, .loading-logo:after, .loading-logo span:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 100%;
+  -webkit-animation: 1s spin ease-in-out infinite;
+          animation: 1s spin ease-in-out infinite;
+}
+.loading-logo:before {
+  -webkit-transform: rotate3d(.8,.5,0,60deg);
+          transform: rotate3d(.8,.5,0,60deg);
+}
+.loading-logo:after {
+  -webkit-transform: rotate3d(0,1,0,60deg);
+          transform: rotate3d(0,1,0,60deg);
+  -webkit-animation-delay: .3s;
+          animation-delay: .3s;
+}
+.loading-logo span:before {
+  -webkit-transform: rotate3d(.5,1,.6,175deg);
+          transform: rotate3d(.5,1,.6,175deg);
+  -webkit-animation-delay: .8s;
+          animation-delay: .8s;
+}
+
+@-webkit-keyframes spin {
+  0%,
+	100% {
+    box-shadow: .2em 0px 0 0px currentcolor;
+  }
+  12% {
+    box-shadow: .2em .2em 0 0 currentcolor;
+  }
+  25% {
+    box-shadow: 0 .2em 0 0px currentcolor;
+  }
+  37% {
+    box-shadow: -.2em .2em 0 0 currentcolor;
+  }
+  50% {
+    box-shadow: -.2em 0 0 0 currentcolor;
+  }
+  62% {
+    box-shadow: -.2em -.2em 0 0 currentcolor;
+  }
+  75% {
+    box-shadow: 0px -.2em 0 0 currentcolor;
+  }
+  87% {
+    box-shadow: .2em -.2em 0 0 currentcolor;
+  }
+}
+@keyframes spin {
+  0% {
+    box-shadow: .2em 0px 2px 1px currentcolor;
+  }
+  12% {
+    box-shadow: .2em .2em 2px 1px currentcolor;
+  }
+  25% {
+    box-shadow: 0 .2em 2px 1px currentcolor;
+  }
+  37% {
+    box-shadow: -.2em .2em 2px 1px currentcolor;
+  }
+  50% {
+    box-shadow: -.2em 2m 2px 1px currentcolor;
+  }
+  62% {
+    box-shadow: -.2em -.2em 2px 1px currentcolor;
+  }
+  75% {
+    box-shadow: 0px -.2em 2px 1px currentcolor;
+  }
+  87% {
+    box-shadow: .2em -.2em 2px 1px currentcolor;
+  }
+  100% {
+    box-shadow: .2em 0px 2px 1px currentcolor;
+  }
+}
+
+.plympics-banner{
+  display: none;
+  text-align: center;
+  font-size: 4rem;
+}

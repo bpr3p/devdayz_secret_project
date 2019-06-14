@@ -5,9 +5,27 @@
  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
  crossorigin=""></script>
 <div id="mapid"></div>
+<div id="teams">
+    <h1 class="p-4">Starring...</h1>
+    <h2 class="team-name p-2"></h2>
+</div>
+
+<div id="plympics" class="loader">
+  <div class="loading-logo mt-5">
+    <span>
+    </span>
+  </div>
+  <div class="loading-text"></div>
+  <div class="plympics-banner">PLYMPICS</div>
+</div>
 
 <script>
 var maps = <%= raw @maps.to_json%>;
+var teams = <%= raw @teams.to_json%>;
+var current_year = <%= @current_year %>;
+
+var TIMEOUT_INTERVAL = 5000;
+
 var MAP_COORDINATES = [];
 var POP_UP_TEXT = [];
 
@@ -42,20 +60,70 @@ var mymap = L.map('mapid', {zoomControl: false,fadeAnimation: true} ).setView(MA
     }).addTo(mymap);
 
 function initialize() {
+    // Map
+    showMap();
+
+    // Teams
+    var intervalTime = (maps.length * TIMEOUT_INTERVAL);
+    setTimeout(teamNames, intervalTime);
+
+    // 3plympics
+    intervalTime_banner = ((teams.length + 1) * TIMEOUT_INTERVAL) + intervalTime;
+    setTimeout(plympics, intervalTime_banner)
+}
+
+function showMap(){
     var i = 0;
 
     moveMarker(MAP_COORDINATES[i], i++);
     
-    var interval;
+    var maps_interval;
 
     //delayed so you can see it move
-    interval = setInterval(() => {
+    maps_interval = setInterval(() => {
         var co_ord = MAP_COORDINATES[i];
         moveMarker(co_ord, i);
         if (++i == MAP_COORDINATES.length) {
-            clearInterval(interval);
+            clearInterval(maps_interval);
         }
-    }, 5000);
+    }, TIMEOUT_INTERVAL);
+}
+
+function teamNames(){
+    $("#teams").fadeIn(1000);
+    $("#plympics").css("z-index", 0);
+
+    var i = 0;
+    var teams_interval;
+
+    //delayed so you can see it move
+    teams_interval = setInterval(() => {
+        var team_name = teams[i].name;
+        $(".team-name").text(team_name);
+        if (++i == teams.length) {
+            clearInterval(teams_interval);
+        }
+    }, TIMEOUT_INTERVAL);
+
+}
+
+function plympics(){
+    $("#teams").fadeOut();
+    $("#plympics").fadeIn(1000);
+    $("#plympics").css("z-index", 1001);
+
+    setTimeout(showPlympicsbanner, TIMEOUT_INTERVAL);
+}
+
+function showPlympicsbanner(){
+   $(".loading-logo").hide();
+   $(".loading-text").hide();
+   $(".plympics-banner").fadeIn();
+
+   setTimeout(() => {
+       $(".plympics-banner").html($(".plympics-banner").text()+"<br/>"+current_year)
+   }, 2000);
+   
 }
 
 function moveMarker(co_ord, index) {
