@@ -3,7 +3,7 @@
   <%= button_to "Add a Year", new_year_path, class: "btn btn-primary btn-sm", method: :get %>
 
   <ol>
-    <% Year.all.order(:id).each do |year| %>
+    <% Year.all.order(:year).each do |year| %>
       <li><%= year.year %></li>
     <% end %>
   </ol>
@@ -13,7 +13,7 @@
   <div>
     <%= form_for :year, url: { action: "set_year" } do |f| %>
       <%= f.label "Set current year:" %>
-      <%= f.collection_select :year_id, Year.order(:id), :id, :year, include_blank: false, selected: @current_year.id%>
+      <%= f.collection_select :year_id, Year.order(:year), :id, :year, include_blank: false, selected: @current_year.id%>
       <%= f.submit "Set year",  class: "btn btn-success btn-sm" %>
     <% end %>
   </div>

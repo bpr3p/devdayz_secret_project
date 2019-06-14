@@ -13,10 +13,11 @@
 
   <div id="year-field">
     <%= form.label :event_id, 'Year' %>
-    <%= form.select(:event_id, options_for_select(Event.pictionary.all.collect {|e| [ e.year.year, e.id ] })) %>
+    <%= form.select(:event_id, options_for_select(Event.pictionary.all.collect {|e| [ e.year.year, e.id ] }, @current_year.id)) %>
   </div>
 
   <div>
+    <br />
     <%= form.submit %>
   </div>
 <% end %>
