@@ -52,6 +52,12 @@ class WordsIndexContainer extends Component {
    .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
+ componentDidUpdate() {
+   if (this.state.time == 0) {
+     clearInterval(this.timer)
+   }
+ }
+
   startTimer() {
     this.setState({ timerOn: true })
     this.timer = setInterval(() => this.setState({
