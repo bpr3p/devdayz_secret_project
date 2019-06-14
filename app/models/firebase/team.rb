@@ -20,5 +20,10 @@ module Firebase
       data = team(reload:true).scores.map{|score| [score.event_id, score.value]}.to_h
       Firebase::Api.new.create_or_update(path, data)
     end
+
+    def delete
+      path = "#{Year.find(team.year_id).year}/Teams/#{team.id}"
+      Firebase::Api.new.delete(path)
+    end
   end
 end
