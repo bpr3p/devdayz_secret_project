@@ -13,7 +13,9 @@ class WordsIndexContainer extends Component {
       clicked_clues: [],
       audioPlaying: false,
       cancelOption: false,
-      confetti: false
+      confetti: false,
+      time: 60,
+      timerOn: false
     }
     this.handleClueClick = this.handleClueClick.bind(this)
     this.playSong = this.playSong.bind(this)
@@ -23,6 +25,8 @@ class WordsIndexContainer extends Component {
     this.setConfetti = this.setConfetti.bind(this)
     this.resetWord = this.resetWord.bind(this)
     this.stopCheerConfetti = this.stopCheerConfetti.bind(this)
+    this.startTimer = this.startTimer.bind(this)
+    this.resetTimer = this.resetTimer.bind(this)
   }
 
   audio = new Audio('/sounds/countdown.mp3')
@@ -48,6 +52,18 @@ class WordsIndexContainer extends Component {
    .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
+  startTimer() {
+    this.setState({ timerOn: true })
+    this.timer = setInterval(() => this.setState({
+      time: this.state.time - 1
+    }), 1000);
+  }
+
+  resetTimer() {
+    this.setState({time: 60, timerOn: false});
+    clearInterval(this.timer)
+  }
+
  handleClueClick(event) {
    let int = parseInt(event.target.id)
    let audioPlaying = this.state.audioPlaying
@@ -60,8 +76,11 @@ class WordsIndexContainer extends Component {
      audioPlaying = true
      this.playSong()
      this.setCancellable()
+     setTimeout(function(){
+       this.startTimer()
+     }.bind(this), 7500)
      old_clicked.push(int)
-     this.setState({ audioPlaying: audioPlaying, clicked_clues: old_clicked })
+     this.setState({ audioPlaying: audioPlaying, clicked_clues: old_clicked, confetti: false })
    }
  }
 
@@ -81,12 +100,14 @@ class WordsIndexContainer extends Component {
    this.audio.pause()
    this.audio.currentTime = 0
    this.cheer.play()
+   this.resetTimer()
    this.setConfetti()
    this.setState({ audioPlaying: false, cancelOption: false });
  }
 
  stopSongCancel() {
    this.audio.pause()
+   this.resetTimer()
    this.audio.currentTime = 0
    this.setState({ audioPlaying: false, cancelOption: false });
  }
@@ -104,6 +125,7 @@ class WordsIndexContainer extends Component {
    old_clicked.splice(index, 1)
    this.stopSongCancel()
    this.stopCheerConfetti()
+   this.resetTimer()
    clearTimeout(this.confetti)
    this.setState({ clicked_clues: old_clicked })
  }
@@ -122,6 +144,7 @@ class WordsIndexContainer extends Component {
     let medium_words;
     let hard_words;
     let nb_words;
+    let timer;
     let cluesById = this.state.clicked_clues
 
     if (this.state.audioPlaying == true) {
@@ -134,6 +157,9 @@ class WordsIndexContainer extends Component {
       document.body.classList.add('confetti')
     } else {
       document.body.classList.remove('confetti')
+    }
+    if (this.state.timerOn == true) {
+      timer = <h3>Time remaining: {this.state.time}s</h3>
     }
 
     if (this.state.easy_clues) {
@@ -236,6 +262,9 @@ class WordsIndexContainer extends Component {
           </div>
           <div className="winButtonDiv">
             {winButton}
+          </div>
+          <div className="timerDiv">
+            {timer}
           </div>
         </div>
       </div>
