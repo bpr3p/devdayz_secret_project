@@ -1,0 +1,33 @@
+<div class="container pt-2">
+  <%= button_to "Back to Teams", teams_path, method: :get, class: "btn btn-primary btn-sm" %>
+
+  <div class="card mt-3 p-2">
+    <%= form_for @team do |form| %>
+      <p>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+      </p>
+
+      <p>
+        <%= form.label :description %><br>
+        <%= form.text_field :description %>
+      </p>
+
+      <p>
+        <%= form.label :total %><br>
+        <%= form.text_field :total %>
+      </p>
+
+      <%= hidden_field(:team, :year_id, value: @team.year_id) %>
+
+      <p>
+        <%= form.submit class: "btn btn-success btn-sm" %>
+      </p>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+ $('li').removeClass('active');
+ $('.teams').addClass('active');
+<% end %>
