@@ -1,11 +1,14 @@
 <div class="container pt-2">
   <%= button_to "Back to Teams", teams_path, method: :get, class: "btn btn-primary btn-sm" %>
 
-  <div class="card mt-3 p-2">
-    <p>
-      <strong>Team Name:</strong>
-      <%= @team.name %>
-    </p>
+  <%= form_for(@team) do |f| %>
+    <div class="card mt-3 p-2">
+      <p>
+        <strong>Team Name:</strong>
+        <%= f.text_field :name %>
+        <%= f.submit "Update Name", class: "btn btn-primary btn-sm" %>
+      </p>
+  <% end %>
 
     <p>
       <strong>Year:</strong>

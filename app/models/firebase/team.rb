@@ -10,8 +10,8 @@ module Firebase
     end
 
     def create_or_sync_in_cloud
-      path = "#{Year.find(team.year_id).year}/Teams/#{team.id}"
-      data = {name: team.name}
+      path = "#{Year.find(team.year_id).year}/Teams/#{team.id}/name"
+      data = team.name
       Firebase::Api.new.create_or_update(path, data)
     end
 
