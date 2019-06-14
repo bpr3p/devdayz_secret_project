@@ -12,6 +12,7 @@
       <li class="teams-listing">
         <%= link_to team.name, team_path(team.id) %>
         <%= button_to "Delete", team_path(id: team.id), method: :delete, 'data-remote': true, form: {style: 'display:inline-block; float: right'}, class: "btn btn-outline-danger btn-xs", style: "display: inline;" %>
+        <%= button_to "Edit", edit_team_path(id: team.id), method: :get, form: {style: 'display:inline-block; float: right'}, class: "mr-2 btn btn-outline-primary btn-xs", style: "display: inline;" %>
       </li>
     <% end %>
     </ol>
