@@ -16,8 +16,11 @@
 
       <ol>
         <% Event.where(year_id: year.id).each do |event| %>
-          <li><%= link_to event.name, event_path(event.id) %>
-          <%= button_to "Delete", event_path(id: event.id), method: :delete, 'data-remote': true, form: {style: 'display:inline-block; float: right'}, class: "btn btn-outline-danger btn-xs", style: "display: inline;" %></li>
+          <li>
+            <%= link_to event.name, event_path(event.id) %>
+            <%= button_to "Edit", edit_event_path(id: event.id), method: :get, form: {style: 'display:inline-block; float: right'}, class: "mr-2 btn btn-outline-primary btn-xs", style: "display: inline;" %>
+            <%= button_to "Delete", event_path(id: event.id), method: :delete, 'data-remote': true, form: {style: 'display:inline-block; float: right'}, class: "btn btn-outline-danger btn-xs", style: "display: inline;" %>
+          </li>
         <% end %>
       </ol>
       <% end %>
