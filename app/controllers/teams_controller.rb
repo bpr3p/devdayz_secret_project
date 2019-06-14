@@ -15,10 +15,6 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
-  def edit
-    @team = Team.find(params[:id])
-  end
-
   def create
     @team = Team.new(team_params)
     respond_to do |format|

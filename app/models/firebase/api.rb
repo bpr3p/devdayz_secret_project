@@ -10,8 +10,9 @@ module Firebase
       `#{command}`
     end
 
-    def delete
-
+    def delete(path)
+      command = "curl -X DELETE '#{FIREBASE_URI}/#{path}.json'"
+      `#{command}`
     end
   end
 end

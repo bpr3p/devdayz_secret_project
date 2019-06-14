@@ -4,7 +4,7 @@
   <div class="card mt-2 p-2">
     <% Year.all.order(id: "desc").each_with_index do |year, index| %>
       <div>
-        <h2 style="vertical-align: -webkit-baseline-middle; display: inline-block;"><%= year.year %></h2> 
+        <h2 style="vertical-align: -webkit-baseline-middle; display: inline-block;"><%= year.year %></h2>
         <%= button_to "Add an Event", new_event_path, params: {year_id: year.id}, method: :get, form: {style: 'display:inline-block;'},  class: "btn btn-primary btn-sm" %>
       </div>
 
@@ -16,13 +16,17 @@
 
       <ol>
         <% Event.where(year_id: year.id).each do |event| %>
-          <li><%= link_to event.name, event_path(event.id) %></li>
+          <li>
+            <%= link_to event.name, event_path(event.id) %>
+            <%= button_to "Edit", edit_event_path(id: event.id), method: :get, form: {style: 'display:inline-block; float: right'}, class: "mr-2 btn btn-outline-primary btn-xs", style: "display: inline;" %>
+            <%= button_to "Delete", event_path(id: event.id), method: :delete, 'data-remote': true, form: {style: 'display:inline-block; float: right'}, class: "btn btn-outline-danger btn-xs", style: "display: inline;" %>
+          </li>
         <% end %>
       </ol>
       <% end %>
 
        <% if index != Year.all.length - 1 %>
-          <hr/> 
+          <hr/>
        <% end %>
     <% end %>
   </div>

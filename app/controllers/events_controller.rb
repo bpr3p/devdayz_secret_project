@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
     @events = Event.all
@@ -12,9 +12,6 @@ class EventsController < ApplicationController
   def new
     @year_id = params[:year_id]
     @event = Event.new
-  end
-
-  def edit
   end
 
   def create
@@ -35,21 +32,32 @@ class EventsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recipe }
+      if @event.update(event_params)
+        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
+    @event = Event.find(params[:id])
     @event.destroy
       respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def set_event
+    @event = Event.find(params[:id]) if params[:id].present?
+  end
+
+  def event_params
+    params.require(:event).permit(:name)
   end
 end

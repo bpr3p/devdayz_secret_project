@@ -1,0 +1,16 @@
+<div class="container pt-2">
+  <%= button_to "Back to Events", events_path, method: :get, class: "btn btn-primary btn-sm" %>
+
+  <div class="card mt-3 p-2">
+    <%= form_for @event do |form| %>
+      <p>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+      </p>
+
+      <p>
+        <%= form.submit class: "btn btn-success btn-sm" %>
+      </p>
+    <% end %>
+  </div>
+</div>

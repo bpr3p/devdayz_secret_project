@@ -5,9 +5,14 @@ module Firebase
     end
 
     def create_or_sync_in_cloud
-      path = "#{Year.find(@event.year_id).year}/Events/#{@event.id}"
-      data = {name: @event.name}
+      path = "#{Year.find(@event.year_id).year}/Events/#{@event.id}/name"
+      data = @event.name
       Firebase::Api.new.create_or_update(path, data)
+    end
+
+    def delete
+      path = "#{Year.find(@event.year_id).year}/Events/#{@event.id}"
+      Firebase::Api.new.delete(path)
     end
   end
 end
