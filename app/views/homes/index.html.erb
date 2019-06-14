@@ -7,7 +7,7 @@
 <div id="mapid"></div>
 <div id="teams">
     <h1 class="p-4">Starring...</h1>
-    <h2 class="team-name p-2"></h2>
+    <h2 class="team-name p-4"></h2>
 </div>
 
 <div id="plympics" class="loader">
@@ -124,10 +124,7 @@ function showPlympicsbanner(){
        $(".plympics-banner").html($(".plympics-banner").text()+"<br/>"+current_year)
    }, 2000);
 
-   setTimeout( () => {
-       redirectToAwesomeStuff(),
-       TIMEOUT_INTERVAL + 2000
-   });
+   setTimeout(redirectToAwesomeStuff, TIMEOUT_INTERVAL);
    
 }
 
