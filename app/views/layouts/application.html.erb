@@ -19,8 +19,10 @@
   <nav class="top-bar">
     <ul class="title-area">
       <li class="site-name">
-        <img src="<%= asset_path('3playlogo.png') %>" style="height: 20px; vertical-align: initial">
-        <h4 style="display: inline">3Plympics</h4>
+        <%=link_to root_path do %>
+          <img class="pl-2" src="<%= asset_path('3playlogo.png') %>" style="height: 20px; vertical-align: initial">
+          <h4 class="pl-2" style="display: inline; color: white; text-decoration:none;">3Plympics</h4>
+        <% end %>
       </li>
     </ul>
 
