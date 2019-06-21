@@ -1,0 +1,30 @@
+<div id="category-index">
+
+  <p></p>
+  <%= link_to "Add a Category", new_category_path, class: "button", id: "add-category-btn" %>
+  <ul>
+    <% Year.all.sort_by(&:year).reverse!.each do |year| %>
+      <h3 class="year-item collapsible"><%= year.year %> &#9660;</h3>
+      <ul class="name-list">
+        <% Category.where(year_id: year.id).each do |category| %>
+          <li>
+            <h5><%= link_to category.name, edit_category_path(category) %></h5>
+            <ul>
+              <% Clue.where(event_id: Event.pictionary.find_by(year: year), category_id: category.id).each do |clue| %>
+                <li class="clue-item">
+                  <%= clue.word %><span class="edit-link"><%= link_to 'Edit', edit_clue_path(clue) %></span>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </ul>
+  <%= link_to "Add a Category", new_category_path, class: "button", id: "add-category-btn" %>
+</div>
+
+<%= javascript_tag do %>
+  $('li').removeClass('active');
+  $('.categories').addClass('active');
+<% end %>

@@ -10,26 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_233344) do
+ActiveRecord::Schema.define(version: 2019_06_22_143649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clues", force: :cascade do |t|
-    t.string "word"
-    t.integer "difficulty"
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "difficulty_id"
-    t.bigint "event_id"
-    t.index ["event_id"], name: "index_clues_on_event_id"
+    t.bigint "year_id"
+    t.index ["year_id"], name: "index_categories_on_year_id"
   end
 
-  create_table "difficulties", force: :cascade do |t|
-    t.string "name"
-    t.integer "rating"
+  create_table "clues", force: :cascade do |t|
+    t.string "word"
+    t.integer "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_clues_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
