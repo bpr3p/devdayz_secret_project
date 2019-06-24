@@ -36,6 +36,6 @@ class CluesController < ApplicationController
 
   private
     def clue_params
-      params.require(:clue).permit(:word, :difficulty_id, :event_id)
+      params.require(:clue).permit(:word, :event_id, :category_id)
     end
 end

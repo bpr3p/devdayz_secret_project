@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post 'set_year', to: 'years#set_year', as: :set_year
 
   resources :clues
-  resources :difficulties
+  resources :categories
   resources :teams
   resources :events
   resources :homes

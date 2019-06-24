@@ -1,0 +1,15 @@
+<%= form_for @category do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :year_id, 'Year' %>
+    <%= form.select(:year_id, options_for_select(Year.all.collect {|y| [ y.year, y.id ] })) %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

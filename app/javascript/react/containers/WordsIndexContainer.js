@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import WordTile from '../components/WordTile'
+import CategoryComponent from '../components/CategoryComponent'
 
 class WordsIndexContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      easy_clues: [],
-      medium_clues: [],
-      hard_clues: [],
-      nb_clues: [],
+      clues: [],
+      categories: [],
       clicked_clues: [],
       audioPlaying: false,
       cancelOption: false,
@@ -33,6 +32,7 @@ class WordsIndexContainer extends Component {
   cheer = new Audio('/sounds/cheer.mp3')
 
   componentDidMount() {
+   let categories = [];
    fetch(`/api/v1/clues`, {
      credentials: 'same-origin'
    })
@@ -47,7 +47,9 @@ class WordsIndexContainer extends Component {
    })
    .then(response => response.json())
    .then(body => {
-     this.setState({ easy_clues: body["clues"]["easy"], medium_clues: body["clues"]["medium"], hard_clues: body["clues"]["hard"], nb_clues: body["clues"]["nailBiter"] })
+     categories = body
+     console.log(body)
+     this.setState({ categories: categories })
    })
    .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
@@ -68,6 +70,7 @@ class WordsIndexContainer extends Component {
   resetTimer() {
     this.setState({time: 60, timerOn: false});
     clearInterval(this.timer)
+    clearTimeout(this.timeout)
   }
 
  handleClueClick(event) {
@@ -82,7 +85,7 @@ class WordsIndexContainer extends Component {
      audioPlaying = true
      this.playSong()
      this.setCancellable()
-     setTimeout(function(){
+     this.timeout = setTimeout(function(){
        this.startTimer()
      }.bind(this), 7500)
      old_clicked.push(int)
@@ -146,12 +149,9 @@ class WordsIndexContainer extends Component {
   render() {
     let winButton;
     let cancelButton;
-    let easy_words;
-    let medium_words;
-    let hard_words;
-    let nb_words;
     let timer;
-    let cluesById = this.state.clicked_clues
+    let cluesById = this.state.clicked_clues;
+    let categoriesAndClues;
 
     if (this.state.audioPlaying == true) {
       winButton = <button id="winButton" onClick={this.stopSongWin}>WE WON!</button>
@@ -168,77 +168,17 @@ class WordsIndexContainer extends Component {
       timer = <h3>Time remaining: {this.state.time}s</h3>
     }
 
-    if (this.state.easy_clues) {
-      easy_words = this.state.easy_clues.map((clue) => {
-        let word = null
-        if (cluesById.includes(clue.id)) {
-          word = clue.word
-        }
+    if (this.state.categories.length > 0) {
+      categoriesAndClues = this.state.categories.map((category) => {
         return (
-          <WordTile
-          key = {clue.id}
-          id = {clue.id}
-          word = {word}
+          <CategoryComponent
+          key = {category.id}
+          id = {category.id}
+          categoryName = {category.name}
+          clues = {category.clues}
           handleClueClick = {this.handleClueClick}
           resetWord = {this.resetWord}
-          difficulty_id = {clue.difficulty_id}
-          />
-        )
-      })
-    }
-
-    if (this.state.medium_clues) {
-      medium_words = this.state.medium_clues.map((clue) => {
-        let word = null
-        if (cluesById.includes(clue.id)) {
-          word = clue.word
-        }
-        return (
-          <WordTile
-          key = {clue.id}
-          id = {clue.id}
-          word = {word}
-          handleClueClick = {this.handleClueClick}
-          resetWord = {this.resetWord}
-          difficulty_id = {clue.difficulty_id}
-          />
-        )
-      })
-    }
-
-    if (this.state.hard_clues) {
-      hard_words = this.state.hard_clues.map((clue) => {
-        let word = null
-        if (cluesById.includes(clue.id)) {
-          word = clue.word
-        }
-        return (
-          <WordTile
-          key = {clue.id}
-          id = {clue.id}
-          word = {word}
-          handleClueClick = {this.handleClueClick}
-          resetWord = {this.resetWord}
-          difficulty_id = {clue.difficulty_id}
-          />
-        )
-      })
-    }
-
-    if (this.state.nb_clues) {
-      nb_words = this.state.nb_clues.map((clue) => {
-        let word = null
-        if (cluesById.includes(clue.id)) {
-          word = clue.word
-        }
-        return (
-          <WordTile
-          key = {clue.id}
-          id = {clue.id}
-          word = {word}
-          handleClueClick = {this.handleClueClick}
-          resetWord = {this.resetWord}
-          difficulty_id = {clue.difficulty_id}
+          cluesById = {cluesById}
           />
         )
       })
@@ -247,22 +187,7 @@ class WordsIndexContainer extends Component {
     return (
       <div className="parent-div">
         <div className="grid-container">
-          <div className="easy-column">
-            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-1" role="img" aria-label="baby">👶</span></div>&nbsp;<div className="header-label">EASY</div></div>
-            {easy_words}
-          </div>
-          <div className="medium-column">
-            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-2" role="img" aria-label="grimacing face">😬</span></div>&nbsp;<div className="header-label">MEDIUM</div></div>
-            {medium_words}
-          </div>
-          <div className="hard-column">
-            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-1" role="img" aria-label="skull">💀</span></div>&nbsp;<div className="header-label">HARD</div></div>
-            {hard_words}
-          </div>
-          <div className="nb-column">
-            <div className="row-header"><div className="emoji-container"><span className="emoji-animation-2" role="img" aria-label="japanese ogre">👹</span></div>&nbsp;<div className="header-label">NAIL BITER</div></div>
-            {nb_words}
-          </div>
+          {categoriesAndClues}
           <div className="cancelButtonDiv">
             {cancelButton}
           </div>

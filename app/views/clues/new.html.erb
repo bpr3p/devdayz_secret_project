@@ -6,9 +6,9 @@
     <%= form.text_field :word %>
   </div>
 
-  <div id="difficulty-field">
-    <%= form.label :difficulty_id, 'Difficulty' %>
-    <%= form.select(:difficulty_id, options_for_select(Difficulty.all.collect {|p| [ p.name, p.id ] })) %>
+  <div id="category-field">
+    <%= form.label :category_id, 'Category' %>
+    <%= form.select(:category_id, options_for_select(Category.all.collect {|c| [ c.name, c.id ] })) %>
   </div>
 
   <div id="year-field">

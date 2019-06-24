@@ -59,28 +59,8 @@
   text-align: center;
 }
 
-.easy-column {
+.clue-column {
   background-color: rgba(0,128,0,.4);
-  grid-column-start: 1;
-  grid-column-end: 2;
-}
-
-.medium-column {
-  background-color: rgba(255,255,0,.3);
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-
-.hard-column {
-  background-color: rgba(255,0,0,.4);
-  grid-column-start: 3;
-  grid-column-end: 4;
-}
-
-.nb-column {
-  background-color: rgba(0,0,0,.4);
-  grid-column-start: 4;
-  grid-column-end: 5;
 }
 
 .row-header {
@@ -99,6 +79,7 @@
 .header-label {
   display: block;
   clear: both;
+  color: red;
 }
 
 .emoji-animation-1 {
@@ -163,7 +144,7 @@
   width: 200px;
 }
 
-#difficulty-field {
+#category-field {
   width: 200px;
 }
 
@@ -184,7 +165,7 @@
   margin-top: -20px;
 }
 
-.difficulty-item {
+.category-item {
   margin-bottom: 0;
 }
 

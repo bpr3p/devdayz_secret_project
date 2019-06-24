@@ -7,11 +7,11 @@
     <% Year.all.sort_by(&:year).reverse!.each do |year| %>
       <h3 class="year-item collapsible"><%= year.year %> &#9660;</h3>
       <ul class="word-list">
-        <% Difficulty.all.sort_by(&:id).each do |difficulty| %>
+        <% Category.joins(:clues).where('clues.event_id = ?', Event.find_by(name: "Pictionary", year: year)).uniq.each do |category| %>
           <li>
-            <h5 class="difficulty-item"><%= difficulty.name%></h5>
+            <h5 class="category-item"><%= category.name%></h5>
             <ul>
-              <% Clue.where(event_id: Event.pictionary.find_by(year: year), difficulty_id: difficulty.id).sort_by(&:word).each do |clue| %>
+              <% Clue.where(event_id: Event.pictionary.find_by(year: year), category_id: category.id).sort_by(&:word).each do |clue| %>
                 <li class="clue-item">
                   <%= clue.word %><span class="edit-link"><%= link_to 'Edit', edit_clue_path(clue) %></span>
                 </li>
